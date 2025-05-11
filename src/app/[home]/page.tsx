@@ -5,39 +5,32 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ExpenseTable } from "./expense-table";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { DialogBox } from "./expense-form";
 import useApi from "@/hooks/useApi";
 import { useRouter } from "next/navigation";
 import MainWrapper from "../ui/main-wrapper";
+import Reports from "../ui/report";
 
-export default function Page() {
-  const [expenseData, setExpenseData] = useState([]);
-  const [refresh, setRefresh] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+export default function Page({ params }) {
+  const { home } = params;
   const router = useRouter();
   const { data, loading, error, fetchApi } = useApi();
-
-  if (error) {
-    router.push("/");
-  }
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     fetchApi("/expense/getExpenses", {}, "GET");
   }, [refresh]);
 
   const refreshPage = () => setRefresh(!refresh);
+
+  if (error) {
+    router.push("/");
+  }
 
   return (
     <MainWrapper>
@@ -48,17 +41,29 @@ export default function Page() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                <BreadcrumbLink href="#">{home}</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
-        <DialogBox text="Add Expense" setRefresh={refreshPage} />
       </header>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <ExpenseTable data={data} refreshPage={refreshPage} />
+      {home === "home" && (
+        <>
+          <div className="">
+            <DialogBox text="Add Expense" setRefresh={refreshPage} />
+          </div>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <ExpenseTable data={data} refreshPage={refreshPage} />
+          )}
+        </>
+      )}
+
+      {home === 'reports' && (
+        <>
+          <Reports />
+        </>
       )}
     </MainWrapper>
   );

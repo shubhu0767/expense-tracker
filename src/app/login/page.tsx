@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import MainWrapper from "../ui/login-wrapper";
 import { Input } from "@/components/ui/input";

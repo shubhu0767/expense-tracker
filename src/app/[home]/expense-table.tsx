@@ -11,6 +11,8 @@ import CustomAlertDialog from "./custom-alert-dialog";
 import {CustomTable} from "../../components/Table/table";
 
 export function ExpenseTable({ data, refreshPage }) {
+
+  
   const columns = [
     {
       id: "select",
