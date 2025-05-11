@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-const MainWrapper = ({children}) => {
+
+const MainWrapper = ({ children }) => {
   return (
-    <div className='w-[80%] lg:w-[30%] m-auto'>{children}</div>
-  )
-}
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>{children}</SidebarInset>
+    </SidebarProvider>
+  );
+};
 
-export default MainWrapper
+export default MainWrapper;

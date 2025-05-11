@@ -37,7 +37,13 @@ const data = {
   navMain: [
     {
       title: "Home",
-      url: "#",
+      url: "/home",
+      icon: SquareTerminal,
+      isActive: true,
+    },
+    {
+      title: "Reports",
+      url: "/reports",
       icon: SquareTerminal,
       isActive: true,
     },
