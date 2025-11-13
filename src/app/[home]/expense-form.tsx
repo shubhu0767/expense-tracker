@@ -99,7 +99,7 @@ export function DialogBox({ setRefresh, text, expenseObj }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add Expense Details</DialogTitle>
+          <DialogTitle>Add User Details</DialogTitle>
           {isError.msg && <DialogDescription>{error}</DialogDescription>}
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -140,7 +140,6 @@ export function DialogBox({ setRefresh, text, expenseObj }) {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Expense Category</SelectLabel>
                   {categoryType.map((item)=> (
                     <SelectItem value={item.name} key={item.id}>{item.name}</SelectItem>
                   ))}

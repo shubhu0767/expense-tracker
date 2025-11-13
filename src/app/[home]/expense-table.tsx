@@ -54,6 +54,10 @@ export function ExpenseTable({ data, refreshPage }) {
       ),
     },
     {
+      accessorKey: "category",
+      header: 'Category',
+    },
+    {
       accessorKey: "amount",
       header: () => <div>Amount</div>,
       cell: ({ row }) => {

@@ -29,6 +29,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import useApi from "@/hooks/useApi"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
 export function NavUser({
   user,
@@ -40,6 +43,18 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter();
+  const { data, loading, error, fetchApi } = useApi();
+
+  const handleLogOut = async () => {
+    try {
+      await fetchApi("/user/logOut", "POST");
+      toast.success("User Logged Out Successfully")
+      router.push('/')
+    } catch (error) {
+      toast.error("Something went wrong")
+    }
+  }
 
   return (
     <SidebarMenu>
@@ -102,7 +117,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogOut}>
               <LogOut />
               Log out
             </DropdownMenuItem>

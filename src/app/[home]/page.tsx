@@ -50,7 +50,7 @@ export default function Page({ params }) {
       {home === "home" && (
         <>
           <div className="">
-            <DialogBox text="Add Expense" setRefresh={refreshPage} />
+            <DialogBox text="Add User" setRefresh={refreshPage} />
           </div>
           {loading ? (
             <div>Loading...</div>
