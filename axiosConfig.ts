@@ -7,7 +7,8 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (request) => {
     // Do something before request is sent
-    const data = JSON.parse(localStorage.getItem("user")) || 'jsdankjnsdknkjsnd';
+    const userStr = localStorage.getItem("user");
+    const data = userStr ? JSON.parse(userStr) : null;
     request.headers = {
       Authorization: "Bearer " + data.accessToken,
       "Content-Type": "application/json",
