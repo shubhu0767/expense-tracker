@@ -6,13 +6,19 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (request) => {
-    // Do something before request is sent
-    const userStr = localStorage.getItem("user");
-    const data = userStr ? JSON.parse(userStr) : null;
-    request.headers = {
-      Authorization: "Bearer " + data.accessToken,
-      "Content-Type": "application/json",
-    };
+    // Prevent SSR errors (Next.js)
+    if (typeof window !== "undefined") {
+      const userStr = localStorage.getItem("user");
+      const data = userStr ? JSON.parse(userStr) : null;
+      const token = data?.accessToken;
+
+      if (token) {
+        request.headers.set("Authorization", `Bearer ${token}`);
+      }
+    }
+
+    request.headers.set("Content-Type", "application/json");
+
     return request;
   },
   (error) => Promise.reject(error)
