@@ -28,7 +28,7 @@ const LogIn = ({ className, ...props }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4040/users/login", {
+      const res = await axios.post("https://expense-tracker-backend-5bqt.onrender.com/users/login", {
         userName,
         password,
       });
