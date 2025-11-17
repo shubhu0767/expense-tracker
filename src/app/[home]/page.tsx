@@ -9,7 +9,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ExpenseTable } from "./expense-table";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { DialogBox } from "./expense-form";
 import useApi from "@/hooks/useApi";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ import MainWrapper from "../ui/main-wrapper";
 import Reports from "../ui/report";
 
 export default function Page({ params }) {
-  const { home } = params;
+  const { home } = use(params);
   const router = useRouter();
   const { data, loading, error, fetchApi } = useApi();
   const [refresh, setRefresh] = useState(false);

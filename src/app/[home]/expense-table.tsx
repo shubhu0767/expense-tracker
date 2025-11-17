@@ -8,11 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogBox } from "./expense-form";
 import CustomAlertDialog from "./custom-alert-dialog";
-import {CustomTable} from "../../components/Table/table";
+import { CustomTable } from "../../components/Table/table";
+import ViewPhoto from "./view-photo";
 
 export function ExpenseTable({ data, refreshPage }) {
-
-  
   const columns = [
     {
       id: "select",
@@ -55,7 +54,7 @@ export function ExpenseTable({ data, refreshPage }) {
     },
     {
       accessorKey: "category",
-      header: 'Category',
+      header: "Category",
     },
     {
       accessorKey: "amount",
@@ -85,10 +84,12 @@ export function ExpenseTable({ data, refreshPage }) {
               expenseObj={expenseObj}
               text={<FaEdit />}
             />
+            <ViewPhoto expenseObj={expenseObj} />
             <CustomAlertDialog
               expenseObj={expenseObj}
               refreshPage={refreshPage}
             />
+
           </div>
         );
       },
