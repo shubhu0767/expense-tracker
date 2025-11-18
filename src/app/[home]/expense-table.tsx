@@ -10,12 +10,14 @@ import { DialogBox } from "./expense-form";
 import CustomAlertDialog from "./custom-alert-dialog";
 import { CustomTable } from "../../components/Table/table";
 import ViewPhoto from "./view-photo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function ExpenseTable({ data, refreshPage }) {
   const columns = [
     {
       id: "select",
       header: ({ table }) => (
+        
         <Checkbox
           checked={
             table.getIsAllPageRowsSelected() ||
@@ -25,13 +27,10 @@ export function ExpenseTable({ data, refreshPage }) {
           aria-label="Select all"
         />
       ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      ),
+      cell: ({ row }) => {
+        return(
+        <ViewPhoto expenseObj={row.original} />
+      )},
       enableSorting: false,
       enableHiding: false,
     },
@@ -55,6 +54,9 @@ export function ExpenseTable({ data, refreshPage }) {
     {
       accessorKey: "category",
       header: "Category",
+      cell: ({row}) => (
+        <div className="text-center">{row.original.category === 'RESERVED' ? <div>R</div> : <div>U</div>}</div>
+      )
     },
     {
       accessorKey: "amount",
@@ -84,7 +86,7 @@ export function ExpenseTable({ data, refreshPage }) {
               expenseObj={expenseObj}
               text={<FaEdit />}
             />
-            <ViewPhoto expenseObj={expenseObj} />
+            
             <CustomAlertDialog
               expenseObj={expenseObj}
               refreshPage={refreshPage}

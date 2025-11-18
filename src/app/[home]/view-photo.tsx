@@ -14,6 +14,7 @@ import { MdOutlinePhotoLibrary } from "react-icons/md";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import useApi from "@/hooks/useApi";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ViewPhoto = ({ expenseObj, refreshPage }) => {
   const { fetchApi } = useApi();
@@ -21,9 +22,10 @@ const ViewPhoto = ({ expenseObj, refreshPage }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Button variant="outline" size="icon">
-          <MdOutlinePhotoLibrary />
-        </Button>
+        <Avatar>
+          <AvatarImage src={expenseObj.userPhoto} />
+          <AvatarFallback>PP</AvatarFallback>
+        </Avatar>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

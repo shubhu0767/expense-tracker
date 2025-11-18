@@ -32,6 +32,8 @@ const initialValues = {
   amount: "",
   category: "",
   date: new Date(),
+  phoneNumber:'',
+  seatNumber: ''
 };
 
 const reducer = (state, action) => ({ ...state, ...action });
@@ -42,7 +44,7 @@ export function DialogBox({ setRefresh, text, expenseObj }) {
   const [userPhoto, setUserPhoto] = useState();
   const { data, error, loading, fetchApi } = useApi();
 
-  const { title, description, amount, category, date } = state;
+  const { title, description, phoneNumber, amount, category, date, seatNumber } = state;
 
   useEffect(() => {
     if (expenseObj?._id) {
@@ -60,6 +62,8 @@ export function DialogBox({ setRefresh, text, expenseObj }) {
         amount: expenseObj.amount.toString(),
         category: expenseObj.category,
         date: formattedDate,
+        phoneNumber: expenseObj.phoneNumber,
+        seatNumber: expenseObj.seatNumber,
       });
     } else setState(initialValues);
   }, [expenseObj?._id]);
@@ -106,6 +110,8 @@ const handleSubmit = async (e) => {
   formData.append("description", description);
   formData.append("amount", amount); 
   formData.append("category", category);
+  formData.append("phoneNumber", phoneNumber);
+  formData.append("seatNumber", seatNumber);
   formData.append("date", date);
 
   if (expenseObj?._id) {
@@ -170,9 +176,29 @@ const handleSubmit = async (e) => {
             <Input
               name="title"
               type="text"
-              placeholder="Title*"
+              placeholder="Full Name*"
               className="col-span-3"
               value={title}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Input
+              name="phoneNumber"
+              type="tel"
+              placeholder="Mobile Number"
+              className="col-span-3"
+              value={phoneNumber}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Input
+              name="seatNumber"
+              type="tel"
+              placeholder="Seat Number"
+              className="col-span-3"
+              value={seatNumber}
               onChange={handleInputChange}
             />
           </div>
