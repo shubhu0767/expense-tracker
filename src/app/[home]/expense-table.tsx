@@ -35,6 +35,10 @@ export function ExpenseTable({ data, refreshPage }) {
       enableHiding: false,
     },
     {
+      accessorKey: "seatNumber",
+      header: "Seat No."
+    },
+    {
       accessorKey: "title",
       header: ({ column }) => {
         return (
